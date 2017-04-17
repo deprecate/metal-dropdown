@@ -1,10 +1,10 @@
 'use strict';
 
-import { core, object } from 'metal';
+import {core, object} from 'metal';
 import dom from 'metal-dom';
-import { Align } from 'metal-position';
+import {Align} from 'metal-position';
 import Component from 'metal-component';
-import { EventHandler } from 'metal-events';
+import {EventHandler} from 'metal-events';
 import Soy from 'metal-soy';
 
 import templates from './Dropdown.soy.js';
@@ -18,7 +18,9 @@ class Dropdown extends Component {
 	 */
 	attached() {
 		super.attached();
-		this.eventHandler_.add(dom.on(document, 'click', this.handleDocClick_.bind(this)));
+		this.eventHandler_.add(
+			dom.on(document, 'click', this.handleDocClick_.bind(this)),
+		);
 	}
 
 	/**
@@ -100,10 +102,16 @@ class Dropdown extends Component {
 	 */
 	syncExpanded(expanded) {
 		if (expanded && this.alignElementSelector) {
-			var alignElement = this.element.querySelector(this.alignElementSelector);
+			var alignElement = this.element.querySelector(
+				this.alignElementSelector,
+			);
 			if (alignElement) {
 				var bodyElement = this.element.querySelector('.dropdown-menu');
-				this.alignedPosition = Align.align(bodyElement, alignElement, this.position);
+				this.alignedPosition = Align.align(
+					bodyElement,
+					alignElement,
+					this.position,
+				);
 			}
 		}
 	}
@@ -141,7 +149,8 @@ class Dropdown extends Component {
 	 * @protected
 	 */
 	valueBodyFn_() {
-		var dropdownMenu = this.element && this.element.querySelector('.dropdown-menu');
+		var dropdownMenu =
+			this.element && this.element.querySelector('.dropdown-menu');
 		return dropdownMenu ? dropdownMenu.innerHTML : '';
 	}
 
@@ -159,7 +168,7 @@ class Dropdown extends Component {
 			[Align.BottomCenter]: 'dropdown',
 			[Align.BottomRight]: 'dropdown',
 			[Align.RightCenter]: 'dropright',
-			[Align.LeftCenter]: 'dropleft'
+			[Align.LeftCenter]: 'dropleft',
 		};
 	}
 
@@ -196,7 +205,7 @@ Dropdown.STATE = {
 	 * @type {number}
 	 */
 	alignedPosition: {
-		validator: Align.isValidPosition
+		validator: Align.isValidPosition,
 	},
 
 	/**
@@ -207,7 +216,7 @@ Dropdown.STATE = {
 	 * @type {string}
 	 */
 	alignElementSelector: {
-		validator: core.isString
+		validator: core.isString,
 	},
 
 	/**
@@ -216,7 +225,7 @@ Dropdown.STATE = {
 	 */
 	body: {
 		isHtml: true,
-		valueFn: 'valueBodyFn_'
+		valueFn: 'valueBodyFn_',
 	},
 
 	/**
@@ -227,7 +236,7 @@ Dropdown.STATE = {
 	classMap: {
 		setter: 'setterClassMapFn_',
 		validator: core.isObject,
-		valueFn: 'valueClassMapFn_'
+		valueFn: 'valueClassMapFn_',
 	},
 
 	/**
@@ -236,7 +245,7 @@ Dropdown.STATE = {
 	 */
 	header: {
 		isHtml: true,
-		valueFn: 'valueHeaderFn_'
+		valueFn: 'valueHeaderFn_',
 	},
 
 	/**
@@ -245,7 +254,7 @@ Dropdown.STATE = {
 	 * @default false
 	 */
 	expanded: {
-		value: false
+		value: false,
 	},
 
 	/**
@@ -257,7 +266,7 @@ Dropdown.STATE = {
 	position: {
 		setter: 'setterPositionFn_',
 		value: Align.BottomLeft,
-		validator: 'validatePosition_'
+		validator: 'validatePosition_',
 	},
 
 	/**
@@ -266,8 +275,8 @@ Dropdown.STATE = {
 	 * @type {boolean}
 	 */
 	positionClassOnMenu: {
-		value: false
-	}
+		value: false,
+	},
 };
 
 export default Dropdown;

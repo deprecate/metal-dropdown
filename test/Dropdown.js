@@ -1,8 +1,8 @@
 'use strict';
 
-import { async } from 'metal';
+import {async} from 'metal';
 import dom from 'metal-dom';
-import { Align } from 'metal-position';
+import {Align} from 'metal-position';
 import Dropdown from '../src/Dropdown';
 
 describe('Dropdown', function() {
@@ -14,14 +14,14 @@ describe('Dropdown', function() {
 
 	it('should render html header', function() {
 		component = new Dropdown({
-			header: '<div class="myHeader"></div>'
+			header: '<div class="myHeader"></div>',
 		});
 		assert.ok(component.element.querySelector('.myHeader'));
 	});
 
 	it('should render html body', function() {
 		component = new Dropdown({
-			body: '<div class="myBody"></div>'
+			body: '<div class="myBody"></div>',
 		});
 		assert.ok(component.element.querySelector('.myBody'));
 	});
@@ -30,10 +30,10 @@ describe('Dropdown', function() {
 		var element = document.createElement('div');
 		dom.append(
 			element,
-			'<div class="myHeader"></div><div class="dropdown-menu"><div class="myBody"></div></div>'
+			'<div class="myHeader"></div><div class="dropdown-menu"><div class="myBody"></div></div>',
 		);
 		component = new Dropdown({
-			element: element
+			element: element,
 		});
 
 		assert.strictEqual('<div class="myHeader"></div>', component.header);
@@ -43,10 +43,10 @@ describe('Dropdown', function() {
 		var element = document.createElement('div');
 		dom.append(
 			element,
-			'<div class="myHeader"></div><div class="dropdown-menu"><div class="myBody"></div></div>'
+			'<div class="myHeader"></div><div class="dropdown-menu"><div class="myBody"></div></div>',
 		);
 		component = new Dropdown({
-			element: element
+			element: element,
 		});
 
 		assert.strictEqual('<div class="myBody"></div>', component.body);
@@ -67,7 +67,7 @@ describe('Dropdown', function() {
 
 	it('should close dropdown', function(done) {
 		component = new Dropdown({
-			expanded: true
+			expanded: true,
 		});
 		assert.ok(dom.hasClass(component.element, 'open'));
 		component.close();
@@ -99,7 +99,7 @@ describe('Dropdown', function() {
 
 	it('should change dropdown position', function(done) {
 		component = new Dropdown({
-			position: 'up'
+			position: 'up',
 		});
 		assert.ok(!dom.hasClass(component.element, 'dropdown'));
 		assert.ok(dom.hasClass(component.element, 'dropup'));
@@ -114,7 +114,7 @@ describe('Dropdown', function() {
 
 	it('should only accept valid positions', function() {
 		component = new Dropdown({
-			position: 'up'
+			position: 'up',
 		});
 		assert.strictEqual(Align.TopLeft, component.position);
 
@@ -131,19 +131,21 @@ describe('Dropdown', function() {
 	it('should set position css class on dropdown-menu when positionClassOnMenu is true', function() {
 		component = new Dropdown({
 			position: Align.RightCenter,
-			positionClassOnMenu: true
+			positionClassOnMenu: true,
 		});
 		var element = component.element;
 		assert.ok(!dom.hasClass(element, 'dropright'));
-		assert.ok(dom.hasClass(element.querySelector('.dropdown-menu'), 'dropright'));
+		assert.ok(
+			dom.hasClass(element.querySelector('.dropdown-menu'), 'dropright'),
+		);
 	});
 
 	it('should set class for the current position according to `classMap` state', function() {
 		component = new Dropdown({
 			classMap: {
-				[Align.RightCenter]: 'my-right-class'
+				[Align.RightCenter]: 'my-right-class',
 			},
-			position: Align.RightCenter
+			position: Align.RightCenter,
 		});
 		var element = component.element;
 		assert.ok(!dom.hasClass(element, 'dropright'));
@@ -159,10 +161,12 @@ describe('Dropdown', function() {
 			Align.align.restore();
 		});
 
-		it('should automatically align through Align.align if alignElementSelector is given', function(done) {
+		it('should automatically align through Align.align if alignElementSelector is given', function(
+			done,
+		) {
 			component = new Dropdown({
 				alignElementSelector: 'button',
-				header: '<button></button>'
+				header: '<button></button>',
 			});
 
 			assert.strictEqual(0, Align.align.callCount);
@@ -173,10 +177,12 @@ describe('Dropdown', function() {
 			});
 		});
 
-		it('should not automatically align through Align.align if alignElementSelector doesn\'t match anything', function(done) {
+		it("should not automatically align through Align.align if alignElementSelector doesn't match anything", function(
+			done,
+		) {
 			component = new Dropdown({
 				alignElementSelector: 'nomatch',
-				header: '<button></button>'
+				header: '<button></button>',
 			});
 
 			assert.strictEqual(0, Align.align.callCount);
@@ -210,7 +216,7 @@ describe('Dropdown', function() {
 			element: '#dropdown',
 			id: 'dropdown',
 			body: () => IncrementalDOM.text('body'),
-			header: () => IncrementalDOM.text('header')
+			header: () => IncrementalDOM.text('header'),
 		};
 		var element = document.createElement('div');
 		IncrementalDOM.patch(element, () => Dropdown.TEMPLATE(config));

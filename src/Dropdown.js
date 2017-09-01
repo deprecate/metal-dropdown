@@ -271,4 +271,5 @@ Dropdown.STATE = {
 	}
 };
 
+export { Dropdown };
 export default Dropdown;
